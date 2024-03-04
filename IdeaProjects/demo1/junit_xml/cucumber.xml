@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="14.078" tests="2" skipped="0" failures="0" errors="0">
+<testcase classname="Login Successfully in CRM" name="Login Successfully in CRM - Example #1.1" time="7.125">
+<system-out><![CDATA[
+Given user on login page....................................................passed
+When user gets title of the FREE CRM........................................passed
+Then user register "alikhan79@gmail.com" and "alikhan0786"..................passed
+And user clicks on login button.............................................passed
+Then user enter "alikhan79@gmail.com" and "alikhan0786".....................passed
+And quit the browser........................................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Login Successfully in CRM" name="Login Successfully in CRM - Example #1.2" time="6.899">
+<system-out><![CDATA[
+Given user on login page....................................................passed
+When user gets title of the FREE CRM........................................passed
+Then user register "alikhan78@gmail.com" and "alikhan0786"..................passed
+And user clicks on login button.............................................passed
+Then user enter "alikhan78@gmail.com" and "alikhan0786".....................passed
+And quit the browser........................................................passed
+]]></system-out>
+</testcase>
+</testsuite>
