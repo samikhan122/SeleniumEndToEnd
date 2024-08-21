@@ -13,10 +13,43 @@ import org.testng.annotations.Test;
 public class AccountsPageTest extends baseTest {
 
 
-    @Test
-    public void getAccPageTitle() {
-        //acc.waitForCurrentUrl();
+	@BeforeClass
+	public void accSetup() {
+		accPage = loginPage.doLogin(prop.getProperty("username"), prop.getProperty("password"));
+	}
 
+	@Test
+	public void accPageTitleTest() {
+		String actTitle = accPage.getAccPageTitle();
+		Assert.assertEquals(actTitle, AppConstants.ACCOUNTS_PAGE_TITLE);
+	}
 
-    }
+	@Test
+	public void accPageURLTest() {
+		String actURL = accPage.getAccPageURL();
+		Assert.assertTrue(actURL.contains(AppConstants.ACC_PAGE_URL_FRACTION));
+	}
+
+	@Test
+	public void isLogoutLinkExistTest() {
+		Assert.assertTrue(accPage.isLogoutLinkExist());
+	}
+
+	@Test
+	public void isMyAccountLinkExistTest() {
+		Assert.assertTrue(accPage.myAccountLinkExist());
+	}
+
+	@Test
+	public void accPageHeadersTest() {
+		List<String> actHeadersList = accPage.getAccountsPageHeadersList();
+		System.out.println(actHeadersList);
+	}
+
+	@Test
+	public void searchTest() {
+		accPage.doSearch("macbook");
+	}
+
+}
 }
