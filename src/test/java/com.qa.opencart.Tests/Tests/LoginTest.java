@@ -6,31 +6,42 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends baseTest {
 
-    @Test(priority = 1)
-    public void LoginWithCred() {
-        loginPage.doLogin("testing02@gmail.com", "alikhan0786");
+ 
+//@Listeners(ExtentReportListener.class)
+@Epic("Epic 100: Design open cart login page")
+@Story("US 101: Design login page features for open cart application")
+@Feature("Feature 201: Adding login features")
+public class LoginPageTest extends baseTest {
 
-    }
+	@Description("Checking login page title....")
+	@Severity(SeverityLevel.MINOR)
+	@Test(priority = 1)
+	public void loginPageTitleTest() {
+		String actTitle = loginPage.getLoginPageTitle();
+		Assert.assertEquals(actTitle, AppConstants.LOGIN_PAGE_TITLE, AppError.TITLE_NOT_FOUND);
+	}
 
-    @Test(priority = 2)
-    public void forgotPasswordLink() {
-        Assert.assertTrue(loginPage.isForgotPasswordLinkExist());
-        System.out.println("Forgotten Link is present");
-    }
+	@Description("Checking login page URL....")
+	@Severity(SeverityLevel.MINOR)
+	@Test(priority = 2)
+	public void loginPageURLTest() {
+		String actURL = loginPage.getLoginPageURL();
+		Assert.assertTrue(actURL.contains(AppConstants.LOGIN_PAGE_URL_FRACTION), AppError.URL_NOT_FOUND);
+	}
 
-    @Test(priority = 3)
-    public void loginUrlTest() {
-        String actUrl = loginPage.currentUrl();
-        Assert.assertTrue(actUrl.contains("route=account/login"));
-    }
+	@Description("Checking forgot pwd link on login page ....")
+	@Severity(SeverityLevel.CRITICAL)
+	@Test(priority = 3)
+	public void forgotPwdLinkExistTest() {
+		Assert.assertTrue(loginPage.isForgotPwdLinkExist());
+	}
 
-    @Test(priority = 4)
-    public void loginPageTitleTest() {
-        String title = loginPage.getLoginPageTitle();
-        Assert.assertEquals(title, "Account Login");
-    }
-
-
-
+	@Description("Checking user is able to login....")
+	@Severity(SeverityLevel.BLOCKER)
+	@Test(priority = 4)
+	public void loginTest() {
+		accPage = loginPage.doLogin(prop.getProperty("username"), prop.getProperty("password"));
+		Assert.assertEquals(accPage.getAccPageTitle(), AppConstants.ACCOUNTS_PAGE_TITLE);
+	}
 
 }
