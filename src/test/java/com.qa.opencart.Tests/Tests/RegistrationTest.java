@@ -11,16 +11,31 @@ import org.testng.annotations.Test;
 public class RegistrationTest extends baseTest {
 
 
-    @Test
-    public void fillInRegistration() throws InterruptedException {
-        rg.ClickOnIcon();
-        String urlAfter = rg.fillInRegistrationAndGetCurrentPageTitle();
-        String url = rg.getCurrentUrl();
-        System.out.println(urlAfter);
-        System.out.println(url);
-        Assert.assertEquals(urlAfter, "Your Account Has Been Created!");
-        Assert.assertTrue(url.contains("?route=account/success"));
-    }
+    @BeforeClass
+	public void regSetup() {
+		registerPage = loginPage.navigateToRegisterPage();
+
+	}
+	
+	
+	public String getRandomEmail() {
+		return "uiautomation"+System.currentTimeMillis()+"@open.com";
+	}
+	
+	
+	@DataProvider
+	public Object[][] getRegData() {
+		return ExcelUtil.getTestData(AppConstants.REG_SHEET_NAME);
+	}
+	
+	
+	
+	@Test(dataProvider = "getRegData")
+	public void userRegisterTest(String firstname, String lastname, String telephone, String password, String subscribe) {
+		Assert.assertTrue(registerPage.userRegisteration(firstname, lastname, getRandomEmail(), telephone, password, subscribe));
+
+	}
+
 
 
 }
